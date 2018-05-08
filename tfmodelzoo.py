@@ -1,12 +1,9 @@
 import tensorflow as tf
 
 def _get_model(sess, model, include_tensors, **kwargs):
-    # preserve previous keras session and create a new one
+    # preserve previous keras session and replace with current
     old_sess = tf.keras.backend.get_session()
-    if sess is None:
-        tf.keras.backend.clear_session()
-    else:
-        tf.keras.backend.set_session(sess)
+    tf.keras.backend.set_session(sess)
 
     # load Keras model via applications module
     mod = model(**kwargs)
@@ -22,11 +19,11 @@ def _get_model(sess, model, include_tensors, **kwargs):
         tensors.append(sess.graph.get_tensor_by_name(name))
 
     tf.keras.backend.set_session(old_sess)
-    return (sess, X, Y, *tensors)
+    return (X, Y, *tensors)
 
 
-def DenseNet121(sess=None, include_tensors=[], **kwargs):
-    """DenseNet pre-trained on ImageNet, returning the session and the input and
+def DenseNet121(session, include_tensors=[], **kwargs):
+    """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
     https://keras.io/applications/#densenet for more information and
     documentation.
@@ -34,8 +31,7 @@ def DenseNet121(sess=None, include_tensors=[], **kwargs):
     # Arguments:
         sess (Session): optional TensorFlow session to load the model and
                         weights on. If not passed, a new session will be
-                        created. In either case, the session is the first value
-                        returned from the function.
+                        created.
         include_tensors: a convenience parameter to return additional tensors
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
@@ -65,18 +61,17 @@ def DenseNet121(sess=None, include_tensors=[], **kwargs):
                     argument is specified.
 
     # Returns:
-        session: the new session instance on which the graph is built
         X: the input tensor of the graph
         Y: the output tensor of the graph (softmax or pooling layer)
         *tensors: any other tensors requested by the user via the
                 `include_tensors` parameter
     """
-    return _get_model(sess, tf.keras.applications.DenseNet121,
+    return _get_model(session, tf.keras.applications.DenseNet121,
                     include_tensors, **kwargs)
 
 
-def DenseNet169(sess=None, include_tensors=[], **kwargs):
-    """DenseNet pre-trained on ImageNet, returning the session and the input and
+def DenseNet169(session, include_tensors=[], **kwargs):
+    """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
     https://keras.io/applications/#densenet for more information and
     documentation.
@@ -84,8 +79,7 @@ def DenseNet169(sess=None, include_tensors=[], **kwargs):
     # Arguments:
         sess (Session): optional TensorFlow session to load the model and
                         weights on. If not passed, a new session will be
-                        created. In either case, the session is the first value
-                        returned from the function.
+                        created.
         include_tensors: a convenience parameter to return additional tensors
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
@@ -115,18 +109,17 @@ def DenseNet169(sess=None, include_tensors=[], **kwargs):
                     argument is specified.
 
     # Returns:
-        session: the new session instance on which the graph is built
         X: the input tensor of the graph
         Y: the output tensor of the graph (softmax or pooling layer)
         *tensors: any other tensors requested by the user via the
                 `include_tensors` parameter
     """
-    return _get_model(sess, tf.keras.applications.DenseNet169,
+    return _get_model(session, tf.keras.applications.DenseNet169,
                     include_tensors, **kwargs)
 
 
-def DenseNet201(sess=None, include_tensors=[], **kwargs):
-    """DenseNet pre-trained on ImageNet, returning the session and the input and
+def DenseNet201(session, include_tensors=[], **kwargs):
+    """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
     https://keras.io/applications/#densenet for more information and
     documentation.
@@ -134,8 +127,7 @@ def DenseNet201(sess=None, include_tensors=[], **kwargs):
     # Arguments:
         sess (Session): optional TensorFlow session to load the model and
                         weights on. If not passed, a new session will be
-                        created. In either case, the session is the first value
-                        returned from the function.
+                        created.
         include_tensors: a convenience parameter to return additional tensors
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
@@ -165,18 +157,17 @@ def DenseNet201(sess=None, include_tensors=[], **kwargs):
                     argument is specified.
 
     # Returns:
-        session: the new session instance on which the graph is built
         X: the input tensor of the graph
         Y: the output tensor of the graph (softmax or pooling layer)
         *tensors: any other tensors requested by the user via the
                 `include_tensors` parameter
     """
-    return _get_model(sess, tf.keras.applications.DenseNet201,
+    return _get_model(session, tf.keras.applications.DenseNet201,
                     include_tensors, **kwargs)
 
 
-def InceptionResNetV2(sess=None, include_tensors=[], **kwargs):
-    """DenseNet pre-trained on ImageNet, returning the session and the input and
+def InceptionResNetV2(session, include_tensors=[], **kwargs):
+    """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
     https://keras.io/applications/#inceptionresnetv2 for more information and
     documentation.
@@ -186,8 +177,7 @@ def InceptionResNetV2(sess=None, include_tensors=[], **kwargs):
     # Arguments:
         sess (Session): optional TensorFlow session to load the model and
                         weights on. If not passed, a new session will be
-                        created. In either case, the session is the first value
-                        returned from the function.
+                        created.
         include_tensors: a convenience parameter to return additional tensors
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
@@ -217,18 +207,17 @@ def InceptionResNetV2(sess=None, include_tensors=[], **kwargs):
                     argument is specified.
 
     # Returns:
-        session: the new session instance on which the graph is built
         X: the input tensor of the graph
         Y: the output tensor of the graph (softmax or pooling layer)
         *tensors: any other tensors requested by the user via the
                 `include_tensors` parameter
     """
-    return _get_model(sess, tf.keras.applications.InceptionResNetV2,
+    return _get_model(session, tf.keras.applications.InceptionResNetV2,
                     include_tensors, **kwargs)
 
 
-def InceptionV3(sess=None, include_tensors=[], **kwargs):
-    """DenseNet pre-trained on ImageNet, returning the session and the input and
+def InceptionV3(session, include_tensors=[], **kwargs):
+    """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
     https://keras.io/applications/#inceptionv3 for more information and
     documentation.
@@ -238,8 +227,7 @@ def InceptionV3(sess=None, include_tensors=[], **kwargs):
     # Arguments:
         sess (Session): optional TensorFlow session to load the model and
                         weights on. If not passed, a new session will be
-                        created. In either case, the session is the first value
-                        returned from the function.
+                        created.
         include_tensors: a convenience parameter to return additional tensors
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
@@ -269,18 +257,17 @@ def InceptionV3(sess=None, include_tensors=[], **kwargs):
                     argument is specified.
 
     # Returns:
-        session: the new session instance on which the graph is built
         X: the input tensor of the graph
         Y: the output tensor of the graph (softmax or pooling layer)
         *tensors: any other tensors requested by the user via the
                 `include_tensors` parameter
     """
-    return _get_model(sess, tf.keras.applications.InceptionV3,
+    return _get_model(session, tf.keras.applications.InceptionV3,
                     include_tensors, **kwargs)
 
 
-def MobileNet(sess=None, include_tensors=[], **kwargs):
-    """DenseNet pre-trained on ImageNet, returning the session and the input and
+def MobileNet(session, include_tensors=[], **kwargs):
+    """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
     https://keras.io/applications/#mobilenet for more information and
     documentation.
@@ -290,8 +277,7 @@ def MobileNet(sess=None, include_tensors=[], **kwargs):
     # Arguments:
         sess (Session): optional TensorFlow session to load the model and
                         weights on. If not passed, a new session will be
-                        created. In either case, the session is the first value
-                        returned from the function.
+                        created.
         include_tensors: a convenience parameter to return additional tensors
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
@@ -321,18 +307,17 @@ def MobileNet(sess=None, include_tensors=[], **kwargs):
                     argument is specified.
 
     # Returns:
-        session: the new session instance on which the graph is built
         X: the input tensor of the graph
         Y: the output tensor of the graph (softmax or pooling layer)
         *tensors: any other tensors requested by the user via the
                 `include_tensors` parameter
     """
-    return _get_model(sess, tf.keras.applications.MobileNet,
+    return _get_model(session, tf.keras.applications.MobileNet,
                     include_tensors, **kwargs)
 
 
-def NASNetLarge(sess=None, include_tensors=[], **kwargs):
-    """DenseNet pre-trained on ImageNet, returning the session and the input and
+def NASNetLarge(session, include_tensors=[], **kwargs):
+    """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
     https://keras.io/applications/#nasnet for more information and
     documentation.
@@ -342,8 +327,7 @@ def NASNetLarge(sess=None, include_tensors=[], **kwargs):
     # Arguments:
         sess (Session): optional TensorFlow session to load the model and
                         weights on. If not passed, a new session will be
-                        created. In either case, the session is the first value
-                        returned from the function.
+                        created.
         include_tensors: a convenience parameter to return additional tensors
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
@@ -373,18 +357,17 @@ def NASNetLarge(sess=None, include_tensors=[], **kwargs):
                     argument is specified.
 
     # Returns:
-        session: the new session instance on which the graph is built
         X: the input tensor of the graph
         Y: the output tensor of the graph (softmax or pooling layer)
         *tensors: any other tensors requested by the user via the
                 `include_tensors` parameter
     """
-    return _get_model(sess, tf.keras.applications.NASNetLarge,
+    return _get_model(session, tf.keras.applications.NASNetLarge,
                     include_tensors, **kwargs)
 
 
-def NASNetMobile(sess=None, include_tensors=[], **kwargs):
-    """DenseNet pre-trained on ImageNet, returning the session and the input and
+def NASNetMobile(session, include_tensors=[], **kwargs):
+    """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
     https://keras.io/applications/#nasnet for more information and
     documentation.
@@ -394,8 +377,7 @@ def NASNetMobile(sess=None, include_tensors=[], **kwargs):
     # Arguments:
         sess (Session): optional TensorFlow session to load the model and
                         weights on. If not passed, a new session will be
-                        created. In either case, the session is the first value
-                        returned from the function.
+                        created.
         include_tensors: a convenience parameter to return additional tensors
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
@@ -425,18 +407,17 @@ def NASNetMobile(sess=None, include_tensors=[], **kwargs):
                     argument is specified.
 
     # Returns:
-        session: the new session instance on which the graph is built
         X: the input tensor of the graph
         Y: the output tensor of the graph (softmax or pooling layer)
         *tensors: any other tensors requested by the user via the
                 `include_tensors` parameter
     """
-    return _get_model(sess, tf.keras.applications.NASNetMobile,
+    return _get_model(session, tf.keras.applications.NASNetMobile,
                     include_tensors, **kwargs)
 
 
-def ResNet50(sess=None, include_tensors=[], **kwargs):
-    """DenseNet pre-trained on ImageNet, returning the session and the input and
+def ResNet50(session, include_tensors=[], **kwargs):
+    """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
     https://keras.io/applications/#resnet50 for more information and
     documentation.
@@ -446,8 +427,7 @@ def ResNet50(sess=None, include_tensors=[], **kwargs):
     # Arguments:
         sess (Session): optional TensorFlow session to load the model and
                         weights on. If not passed, a new session will be
-                        created. In either case, the session is the first value
-                        returned from the function.
+                        created.
         include_tensors: a convenience parameter to return additional tensors
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
@@ -477,18 +457,17 @@ def ResNet50(sess=None, include_tensors=[], **kwargs):
                     argument is specified.
 
     # Returns:
-        session: the new session instance on which the graph is built
         X: the input tensor of the graph
         Y: the output tensor of the graph (softmax or pooling layer)
         *tensors: any other tensors requested by the user via the
                 `include_tensors` parameter
     """
-    return _get_model(sess, tf.keras.applications.ResNet50,
+    return _get_model(session, tf.keras.applications.ResNet50,
                     include_tensors, **kwargs)
 
 
-def VGG16(sess=None, include_tensors=[], **kwargs):
-    """DenseNet pre-trained on ImageNet, returning the session and the input and
+def VGG16(session, include_tensors=[], **kwargs):
+    """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
     https://keras.io/applications/#vgg16 for more information and
     documentation.
@@ -498,8 +477,7 @@ def VGG16(sess=None, include_tensors=[], **kwargs):
     # Arguments:
         sess (Session): optional TensorFlow session to load the model and
                         weights on. If not passed, a new session will be
-                        created. In either case, the session is the first value
-                        returned from the function.
+                        created.
         include_tensors: a convenience parameter to return additional tensors
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
@@ -529,18 +507,17 @@ def VGG16(sess=None, include_tensors=[], **kwargs):
                     argument is specified.
 
     # Returns:
-        session: the new session instance on which the graph is built
         X: the input tensor of the graph
         Y: the output tensor of the graph (softmax or pooling layer)
         *tensors: any other tensors requested by the user via the
                 `include_tensors` parameter
     """
-    return _get_model(sess, tf.keras.applications.VGG16,
+    return _get_model(session, tf.keras.applications.VGG16,
                     include_tensors, **kwargs)
 
 
-def VGG19(sess=None, include_tensors=[], **kwargs):
-    """DenseNet pre-trained on ImageNet, returning the session and the input and
+def VGG19(session, include_tensors=[], **kwargs):
+    """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
     https://keras.io/applications/#vgg19 for more information and
     documentation.
@@ -550,8 +527,7 @@ def VGG19(sess=None, include_tensors=[], **kwargs):
     # Arguments:
         sess (Session): optional TensorFlow session to load the model and
                         weights on. If not passed, a new session will be
-                        created. In either case, the session is the first value
-                        returned from the function.
+                        created.
         include_tensors: a convenience parameter to return additional tensors
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
@@ -581,18 +557,17 @@ def VGG19(sess=None, include_tensors=[], **kwargs):
                     argument is specified.
 
     # Returns:
-        session: the new session instance on which the graph is built
         X: the input tensor of the graph
         Y: the output tensor of the graph (softmax or pooling layer)
         *tensors: any other tensors requested by the user via the
                 `include_tensors` parameter
     """
-    return _get_model(sess, tf.keras.applications.VGG19,
+    return _get_model(session, tf.keras.applications.VGG19,
                     include_tensors, **kwargs)
 
 
-def Xception(sess=None, include_tensors=[], **kwargs):
-    """DenseNet pre-trained on ImageNet, returning the session and the input and
+def Xception(session, include_tensors=[], **kwargs):
+    """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
     https://keras.io/applications/#xception for more information and
     documentation.
@@ -602,8 +577,7 @@ def Xception(sess=None, include_tensors=[], **kwargs):
     # Arguments:
         sess (Session): optional TensorFlow session to load the model and
                         weights on. If not passed, a new session will be
-                        created. In either case, the session is the first value
-                        returned from the function.
+                        created.
         include_tensors: a convenience parameter to return additional tensors
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
@@ -633,11 +607,10 @@ def Xception(sess=None, include_tensors=[], **kwargs):
                     argument is specified.
 
     # Returns:
-        session: the new session instance on which the graph is built
         X: the input tensor of the graph
         Y: the output tensor of the graph (softmax or pooling layer)
         *tensors: any other tensors requested by the user via the
                 `include_tensors` parameter
     """
-    return _get_model(sess, tf.keras.applications.Xception,
+    return _get_model(session, tf.keras.applications.Xception,
                     include_tensors, **kwargs)
