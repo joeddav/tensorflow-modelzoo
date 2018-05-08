@@ -12,6 +12,9 @@ The API was meant to mirror the [Keras Applications](https://keras.io/applicatio
 ```python3
 from tfmodelzoo import InceptionV3
 sess, X, Y = InceptionV3(include_top=True, weights='imagenet')
+# X is the input tensor and Y is the last operation of the model (in this case, softmax)
+loss = tf.losses.log_loss(labels, Y)
+sess.run([loss, Y], feed_dict={X: data})
 ```
 
 The graph can then be accessed (if needed) by `sess.graph`. If another tensor (other than the input and output tensors) is needed, it can be accessed from the graph directly or when loading the model:
@@ -21,7 +24,7 @@ conv1 = sess.graph.get_tensor_by_name('conv1tensorname:0') # access from graph d
 sess, X, Y, conv1 = InceptionV3(include_tensors=['conv1tensorname:0']) # access via convenience parameter
 ```
 
-By default, a new graph is created on a new session and returned to the user. However, a session may also be passed to API to load the model directly onto it.
+By default, the model is loaded onto a new session which is returned to the user. A custom session can also be passed to the API, however:
 
 ```python3
 sess = tf.Session()
