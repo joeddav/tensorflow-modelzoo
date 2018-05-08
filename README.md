@@ -36,6 +36,21 @@ Beyond that, see the [Keras Documentation](https://keras.io/applications/) for i
 
 _Note: Passing a Keras `Input`, as indicated in the documentation, works, but as of now there is no way to do this with pure TensorFlow_.
 
+### Available Models:
+
+Users may refer to the [Keras Documentation](https://keras.io/applications/) for detailed information about the models available. That said, the models currently supported are:
+
+- Xception
+- VGG16
+- VGG19
+- ResNet50
+- InceptionV3
+- InceptionResNetV2
+- MobileNet
+- DenseNet121
+- DenseNet169
+- DenseNet201
+
 ### Setup:
 With pip, simply run:
 ```
