@@ -42,9 +42,24 @@ conv1 = sess.graph.get_tensor_by_name('conv1tensorname:0')
 X, Y, conv1 = InceptionV3(sess, include_tensors=['conv1tensorname:0'])
 ```
 
-That's about it! Beyond that, see the [Keras
-Documentation](https://keras.io/applications/) for information on the arguments
-that may be passed for each model.
+It also imports the [Keras ImageNet
+utils](https://github.com/keras-team/keras/blob/master/keras/applications/imagenet_utils.py)
+for you, making it easy to preprocess
+inputs and decode your predictions back to their text labels:
+
+```python3
+from tfmodelzoo import preprocess_input, decode_predictions
+data = preprocess_input(images)
+predictions = sess.run(Y, feed_dict={X: data})
+pred_labels = decode_predictions(predictions, top=3)
+#[[('n02088364', 'beagle', 0.8906793),
+#  ('n02092339', 'Weimaraner', 0.06135427),
+#  ('n02108000', 'EntleBucher', 0.012612144)]]
+```
+
+See the [demo notebook](demo/demo.ipynb) for an example. Beyond that, reference
+the [Keras Documentation](https://keras.io/applications/) for information on the
+arguments that may be passed for each model.
 
 _Note: Passing a Keras `Input`, as indicated in the documentation, works, but as
 of now there is no way to do this with pure TensorFlow_.

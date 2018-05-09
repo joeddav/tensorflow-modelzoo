@@ -1,11 +1,12 @@
 import tensorflow as tf
+from tensorflow.python.keras.applications.densenet import decode_predictions, preprocess_input
 
 def _get_model(sess, model, include_tensors, **kwargs):
-    # preserve previous keras session and replace with current
+    # preserve previous tf.keras session and replace with current
     old_sess = tf.keras.backend.get_session()
     tf.keras.backend.set_session(sess)
 
-    # load Keras model via applications module
+    # load tf.keras model via applications module
     mod = model(**kwargs)
 
     # get input tensor for feeddict needs and get output tensor
@@ -25,7 +26,7 @@ def _get_model(sess, model, include_tensors, **kwargs):
 def DenseNet121(session, include_tensors=[], **kwargs):
     """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
-    https://keras.io/applications/#densenet for more information and
+    https://tf.keras.io/applications/#densenet for more information and
     documentation.
 
     # Arguments:
@@ -36,11 +37,11 @@ def DenseNet121(session, include_tensors=[], **kwargs):
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
                         `sess.graph.get_tensor_by_name(name)`.
-        **kwargs: arguments to be passed to the Keras application. See
-                https://keras.io/applications/#densenet. The standard are
+        **kwargs: arguments to be passed to the tf.keras application. See
+                https://tf.keras.io/applications/#densenet. The standard are
                 consist of the following parameters, but certain models have
                 additional options as well. Note also that the `input`
-                parameter in the Keras documentation is not currently
+                parameter in the tf.keras documentation is not currently
                 supported.
             include_top (bool): whether to include the fully connected layers of
                                 the network at the end
@@ -73,7 +74,7 @@ def DenseNet121(session, include_tensors=[], **kwargs):
 def DenseNet169(session, include_tensors=[], **kwargs):
     """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
-    https://keras.io/applications/#densenet for more information and
+    https://tf.keras.io/applications/#densenet for more information and
     documentation.
 
     # Arguments:
@@ -84,11 +85,11 @@ def DenseNet169(session, include_tensors=[], **kwargs):
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
                         `sess.graph.get_tensor_by_name(name)`.
-        **kwargs: arguments to be passed to the Keras application. See
-                https://keras.io/applications/#densenet. The standard are
+        **kwargs: arguments to be passed to the tf.keras application. See
+                https://tf.keras.io/applications/#densenet. The standard are
                 consist of the following parameters, but certain models have
                 additional options as well. Note also that the `input`
-                parameter in the Keras documentation is not currently
+                parameter in the tf.keras documentation is not currently
                 supported.
             include_top (bool): whether to include the fully connected layers of
                                 the network at the end
@@ -121,7 +122,7 @@ def DenseNet169(session, include_tensors=[], **kwargs):
 def DenseNet201(session, include_tensors=[], **kwargs):
     """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
-    https://keras.io/applications/#densenet for more information and
+    https://tf.keras.io/applications/#densenet for more information and
     documentation.
 
     # Arguments:
@@ -132,11 +133,11 @@ def DenseNet201(session, include_tensors=[], **kwargs):
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
                         `sess.graph.get_tensor_by_name(name)`.
-        **kwargs: arguments to be passed to the Keras application. See
-                https://keras.io/applications/#densenet. The standard are
+        **kwargs: arguments to be passed to the tf.keras application. See
+                https://tf.keras.io/applications/#densenet. The standard are
                 consist of the following parameters, but certain models have
                 additional options as well. Note also that the `input`
-                parameter in the Keras documentation is not currently
+                parameter in the tf.keras documentation is not currently
                 supported.
             include_top (bool): whether to include the fully connected layers of
                                 the network at the end
@@ -169,7 +170,7 @@ def DenseNet201(session, include_tensors=[], **kwargs):
 def InceptionResNetV2(session, include_tensors=[], **kwargs):
     """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
-    https://keras.io/applications/#inceptionresnetv2 for more information and
+    https://tf.keras.io/applications/#inceptionresnetv2 for more information and
     documentation.
 
     Min image size: 139x139x3
@@ -182,11 +183,11 @@ def InceptionResNetV2(session, include_tensors=[], **kwargs):
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
                         `sess.graph.get_tensor_by_name(name)`.
-        **kwargs: arguments to be passed to the Keras application. See
-                https://keras.io/applications/#inceptionresnetv2. The standard
+        **kwargs: arguments to be passed to the tf.keras application. See
+                https://tf.keras.io/applications/#inceptionresnetv2. The standard
                 are consist of the following parameters, but certain models
                 have additional options as well. Note also that the `input`
-                parameter in the Keras documentation is not currently
+                parameter in the tf.keras documentation is not currently
                 supported.
             include_top (bool): whether to include the fully connected layers of
                                 the network at the end
@@ -219,7 +220,7 @@ def InceptionResNetV2(session, include_tensors=[], **kwargs):
 def InceptionV3(session, include_tensors=[], **kwargs):
     """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
-    https://keras.io/applications/#inceptionv3 for more information and
+    https://tf.keras.io/applications/#inceptionv3 for more information and
     documentation.
 
     Min image size: 139x139x3
@@ -232,11 +233,11 @@ def InceptionV3(session, include_tensors=[], **kwargs):
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
                         `sess.graph.get_tensor_by_name(name)`.
-        **kwargs: arguments to be passed to the Keras application. See
-                https://keras.io/applications/#inceptionv3. The standard are
+        **kwargs: arguments to be passed to the tf.keras application. See
+                https://tf.keras.io/applications/#inceptionv3. The standard are
                 consist of the following parameters, but certain models have
                 additional options as well. Note also that the `input`
-                parameter in the Keras documentation is not currently
+                parameter in the tf.keras documentation is not currently
                 supported.
             include_top (bool): whether to include the fully connected layers of
                                 the network at the end
@@ -269,7 +270,7 @@ def InceptionV3(session, include_tensors=[], **kwargs):
 def MobileNet(session, include_tensors=[], **kwargs):
     """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
-    https://keras.io/applications/#mobilenet for more information and
+    https://tf.keras.io/applications/#mobilenet for more information and
     documentation.
 
     Min image size: 32x32x3
@@ -282,11 +283,11 @@ def MobileNet(session, include_tensors=[], **kwargs):
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
                         `sess.graph.get_tensor_by_name(name)`.
-        **kwargs: arguments to be passed to the Keras application. See
-                https://keras.io/applications/#mobilenet. The standard are
+        **kwargs: arguments to be passed to the tf.keras application. See
+                https://tf.keras.io/applications/#mobilenet. The standard are
                 consist of the following parameters, but certain models have
                 additional options as well. Note also that the `input`
-                parameter in the Keras documentation is not currently
+                parameter in the tf.keras documentation is not currently
                 supported.
             include_top (bool): whether to include the fully connected layers of
                                 the network at the end
@@ -319,7 +320,7 @@ def MobileNet(session, include_tensors=[], **kwargs):
 def NASNetLarge(session, include_tensors=[], **kwargs):
     """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
-    https://keras.io/applications/#nasnet for more information and
+    https://tf.keras.io/applications/#nasnet for more information and
     documentation.
 
     Min image size: 32x32x3
@@ -332,11 +333,11 @@ def NASNetLarge(session, include_tensors=[], **kwargs):
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
                         `sess.graph.get_tensor_by_name(name)`.
-        **kwargs: arguments to be passed to the Keras application. See
-                https://keras.io/applications/#nasnet. The standard are
+        **kwargs: arguments to be passed to the tf.keras application. See
+                https://tf.keras.io/applications/#nasnet. The standard are
                 consist of the following parameters, but certain models have
                 additional options as well. Note also that the `input`
-                parameter in the Keras documentation is not currently
+                parameter in the tf.keras documentation is not currently
                 supported.
             include_top (bool): whether to include the fully connected layers of
                                 the network at the end
@@ -369,7 +370,7 @@ def NASNetLarge(session, include_tensors=[], **kwargs):
 def NASNetMobile(session, include_tensors=[], **kwargs):
     """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
-    https://keras.io/applications/#nasnet for more information and
+    https://tf.keras.io/applications/#nasnet for more information and
     documentation.
 
     Min image size: 32x32x3
@@ -382,11 +383,11 @@ def NASNetMobile(session, include_tensors=[], **kwargs):
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
                         `sess.graph.get_tensor_by_name(name)`.
-        **kwargs: arguments to be passed to the Keras application. See
-                https://keras.io/applications/#nasnet. The standard are
+        **kwargs: arguments to be passed to the tf.keras application. See
+                https://tf.keras.io/applications/#nasnet. The standard are
                 consist of the following parameters, but certain models have
                 additional options as well. Note also that the `input`
-                parameter in the Keras documentation is not currently
+                parameter in the tf.keras documentation is not currently
                 supported.
             include_top (bool): whether to include the fully connected layers of
                                 the network at the end
@@ -419,7 +420,7 @@ def NASNetMobile(session, include_tensors=[], **kwargs):
 def ResNet50(session, include_tensors=[], **kwargs):
     """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
-    https://keras.io/applications/#resnet50 for more information and
+    https://tf.keras.io/applications/#resnet50 for more information and
     documentation.
 
     Min image size: 197x197x3
@@ -432,11 +433,11 @@ def ResNet50(session, include_tensors=[], **kwargs):
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
                         `sess.graph.get_tensor_by_name(name)`.
-        **kwargs: arguments to be passed to the Keras application. See
-                https://keras.io/applications/#resnet50. The standard are
+        **kwargs: arguments to be passed to the tf.keras application. See
+                https://tf.keras.io/applications/#resnet50. The standard are
                 consist of the following parameters, but certain models have
                 additional options as well. Note also that the `input`
-                parameter in the Keras documentation is not currently
+                parameter in the tf.keras documentation is not currently
                 supported.
             include_top (bool): whether to include the fully connected layers of
                                 the network at the end
@@ -469,7 +470,7 @@ def ResNet50(session, include_tensors=[], **kwargs):
 def VGG16(session, include_tensors=[], **kwargs):
     """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
-    https://keras.io/applications/#vgg16 for more information and
+    https://tf.keras.io/applications/#vgg16 for more information and
     documentation.
 
     Min image size: 48x48
@@ -482,11 +483,11 @@ def VGG16(session, include_tensors=[], **kwargs):
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
                         `sess.graph.get_tensor_by_name(name)`.
-        **kwargs: arguments to be passed to the Keras application. See
-                https://keras.io/applications/#vgg16. The standard are
+        **kwargs: arguments to be passed to the tf.keras application. See
+                https://tf.keras.io/applications/#vgg16. The standard are
                 consist of the following parameters, but certain models have
                 additional options as well. Note also that the `input`
-                parameter in the Keras documentation is not currently
+                parameter in the tf.keras documentation is not currently
                 supported.
             include_top (bool): whether to include the fully connected layers of
                                 the network at the end
@@ -519,7 +520,7 @@ def VGG16(session, include_tensors=[], **kwargs):
 def VGG19(session, include_tensors=[], **kwargs):
     """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
-    https://keras.io/applications/#vgg19 for more information and
+    https://tf.keras.io/applications/#vgg19 for more information and
     documentation.
 
     Min image size: 48x48
@@ -532,11 +533,11 @@ def VGG19(session, include_tensors=[], **kwargs):
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
                         `sess.graph.get_tensor_by_name(name)`.
-        **kwargs: arguments to be passed to the Keras application. See
-                https://keras.io/applications/#vgg19. The standard are
+        **kwargs: arguments to be passed to the tf.keras application. See
+                https://tf.keras.io/applications/#vgg19. The standard are
                 consist of the following parameters, but certain models have
                 additional options as well. Note also that the `input`
-                parameter in the Keras documentation is not currently
+                parameter in the tf.keras documentation is not currently
                 supported.
             include_top (bool): whether to include the fully connected layers of
                                 the network at the end
@@ -569,7 +570,7 @@ def VGG19(session, include_tensors=[], **kwargs):
 def Xception(session, include_tensors=[], **kwargs):
     """DenseNet pre-trained on ImageNet, returning the input and
     output tensors. Graph accessible via `sess.graph`. See
-    https://keras.io/applications/#xception for more information and
+    https://tf.keras.io/applications/#xception for more information and
     documentation.
 
     Min image size: 71x71x3
@@ -582,11 +583,11 @@ def Xception(session, include_tensors=[], **kwargs):
                         from the graph in addition to the input and output
                         layers. Can also be done by calling
                         `sess.graph.get_tensor_by_name(name)`.
-        **kwargs: arguments to be passed to the Keras application. See
-                https://keras.io/applications/#xception. The standard are
+        **kwargs: arguments to be passed to the tf.keras application. See
+                https://tf.keras.io/applications/#xception. The standard are
                 consist of the following parameters, but certain models have
                 additional options as well. Note also that the `input`
-                parameter in the Keras documentation is not currently
+                parameter in the tf.keras documentation is not currently
                 supported.
             include_top (bool): whether to include the fully connected layers of
                                 the network at the end
