@@ -1,5 +1,9 @@
 # ImageNet Model Zoo for TensorFlow
+
 _via Keras Applications_
+
+_Note: this tool is largely obsolete for those using TF 2.0, which places more 
+of an emphasis on Keras models._
 
 The _TensorFlow Model Zoo_ serves to address the missing component of TensorFlow
 which is present in nearly every other deep learning framework: easy access to
